@@ -63,7 +63,7 @@ export default {
         }
         if (chance > 95) {
             win = amount * 10;
-            wallet += win;
+            parseInt(wallet) += parseInt(win);
             message = `🎉🎉 JACKPOT!!! 🎉🎉\nYou hit the jackpot and won 10x your amount of ${amount} <:florin_coin:1102216846830215229>. Enjoy your ${win} <:florin_coin:1102216846830215229>!`
             content = ":gem: :gem: :gem:"
         };

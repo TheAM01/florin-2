@@ -15,6 +15,7 @@ export default {
         let bheek = Math.floor(Math.random() * 1001);
 	
         let gotBeg = [
+
             `lol ${bheek}`,
             `You explored a sewer and found ${bheek} <:florin_coin:1102216846830215229>.`,
             `You begged for some coins from Harry Styles and he gave you ${bheek} <:florin_coin:1102216846830215229>.`,
@@ -33,6 +34,16 @@ export default {
             `Rick Astley donated you ${bheek} <:florin_coin:1102216846830215229> and Rick rolled you in exchange.`,
             `A stray cat gave you ${bheek} <:florin_coin:1102216846830215229>.`,
             `lol ${bheek}`,
+            `Drake threw ${bheek} <:florin_coin:1102216846830215229> at you.`,
+            `You became the president of the United States for 3 seconds... you got paid ${bheek} <:florin_coin:1102216846830215229> for it.`,
+            `You found ${bheek} <:florin_coin:1102216846830215229> in a dumpster.`,
+            `Bank error in your favor. Collect ${bheek} <:florin_coin:1102216846830215229>.`,
+            `An insurance fraud profit earned you ${bheek} <:florin_coin:1102216846830215229>.`,
+            `You were awarded ${bheek} <:florin_coin:1102216846830215229> for being a law abiding citizen.`,
+            `Bill Gates sneezed and ${bheek} <:florin_coin:1102216846830215229> fell from his pocket... you stole them.`,
+            `You found ${bheek + 10000} <:florin_coin:1102216846830215229> on a train track but the train hit you and you had to pay 10000 <:florin_coin:1102216846830215229> for it.`,
+            `A dog gave you ${bheek} <:florin_coin:1102216846830215229> coins.`,
+
         ];
 
         let wallet = await db.get(`wallet_${interaction.user.id}`);
