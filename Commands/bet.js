@@ -35,37 +35,36 @@ export default {
 
 
         if (chance > 0 && chance <= 30) {
-            wallet -= amount
-            message = `Aw snap! You lost ${amount} coins :(\nBetter luck next time.`
-            content = ":grapes: :lemon: :watermelon:"
+            message = `Aw snap! You lost ${amount} <:florin_coin:1102216846830215229> :(\nBetter luck next time.`
+            content = slotIcons('fruits', 'fruits', 'fruits')
         }
         if (chance > 30 && chance <= 50) {
-            win = amount
+            wallet += amount
             message = `Nothing happened... Try again.`
-            content = ":lemon: :bell: :cherries:"
+            content = slotIcons('fruits', 'riches', 'fruits')
         }
         if (chance > 50 && chance <= 70) {
             win = amount * 2;
             wallet += win;
-            message = `Congratulations! You doubled ${amount} coins and won ${win} coins!`
-            content = ":gem: :grapes: :grapes:"
+            message = `Congratulations! You doubled ${amount} <:florin_coin:1102216846830215229> and won ${win} <:florin_coin:1102216846830215229>!`
+            content = slotIcons("riches", "fruits", "fruits")
         }
         if (chance > 70 && chance <= 85) {
             win = amount * 3;
             wallet += win;
-            message = `Congratulations! You tripled ${amount} coins and won ${win} coins!`
-            content = ":cherries: :hearts: :hearts:"
+            message = `Congratulations! You tripled ${amount} <:florin_coin:1102216846830215229> and won ${win} <:florin_coin:1102216846830215229>!`
+            content = slotIcons("fruits", "cards", "cards")
         }
         if (chance > 85 && chance <= 95) {
             win = amount * 5;
             wallet += win;
-            message = `Congratulations! Your ${amount} coins got multiplied 5 times! Enjoy ${win} coins.`
-            content = ":hearts: :hearts: :hearts:"
+            message = `Congratulations! Your ${amount} <:florin_coin:1102216846830215229> got multiplied 5 times! Enjoy ${win} <:florin_coin:1102216846830215229>.`
+            content = slotIcons("cards", "cards", "cards")
         }
         if (chance > 95) {
             win = amount * 10;
             wallet += win;
-            message = `🎉🎉 JACKPOT!!! 🎉🎉\nYou hit the jackpot and won 10x your amount of ${amount} coins. Enjoy your ${win} coins!`
+            message = `🎉🎉 JACKPOT!!! 🎉🎉\nYou hit the jackpot and won 10x your amount of ${amount} <:florin_coin:1102216846830215229>. Enjoy your ${win} <:florin_coin:1102216846830215229>!`
             content = ":gem: :gem: :gem:"
         };
 
@@ -99,11 +98,11 @@ function embed (user, msg, color, amount, win) {
     .setColor(color)
     .addFields(
         {
-            name: "Bet", value: amount.toString()
+            name: "Bet", value: `${amount} <:florin_coin:1102216846830215229>`
         }, {
-            name: "Win", value: win.toString()
+            name: "Win", value: `${win} <:florin_coin:1102216846830215229>`
         }, {
-            name: "Profit", value: (win - amount).toString()
+            name: "Profit", value: `${(win - amount)} <:florin_coin:1102216846830215229>`
         }
     )
     .setThumbnail(user.avatarURL())
@@ -140,3 +139,54 @@ function rowBuilder () {
         
         return row;
 }
+
+const slots = {
+
+    fruits: [
+        ":grapes:",
+        ":watermelon:",
+        ":pear:",
+        ":cherries:",
+        ":lemon:",
+    ],
+    cards: [
+        "<:clubs:1102222010047811624>",
+        "<:diamonds:1102222004117065778>",
+        "<:hearts:1102221997993361438>",
+        "<:spades:1102222015169052762>",
+    ],
+    riches: [
+        ":crown:",
+        ":gem:",
+        ":dollar:"
+    ]
+
+
+}
+
+function slotIcons (t1, t2, t3) {
+
+    let e1 = slots[t1][Math.floor(Math.random() * slots[t1].length)];
+    let e2 = slots[t2][Math.floor(Math.random() * slots[t2].length)];
+    let e3 = slots[t3][Math.floor(Math.random() * slots[t3].length)];
+
+    return shuffle([e1, e2, e3])
+}
+
+function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+  
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array.join(" ");
+  }

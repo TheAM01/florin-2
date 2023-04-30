@@ -33,7 +33,7 @@ export default {
             return interaction.editReply({content: `You have already claimed your daily amount. Please try again in ${timeLeft}!`, components: [row]});
         }
 
-        if (!userWallet) return interaction.editReply('You don\'t have a wallet yet. Do `/register` first.');
+        if (userWallet === undefined || userWallet === null) return interaction.editReply('You don\'t have a wallet yet. Do `/register` first.');
         
         userWallet += 2000;
         user.dailyCheck = Date.now()

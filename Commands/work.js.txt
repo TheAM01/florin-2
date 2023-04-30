@@ -1,0 +1,17 @@
+import {SlashCommandBuilder} from "discord.js";
+import promises from "node:timers/promises";
+const wait = promises.setTimeout
+
+export default {
+
+    data: new SlashCommandBuilder()
+        .setName('job')
+        .setDescription('Select a job')
+        .add
+        ,
+
+    async execute(interaction, client) {
+        
+    },
+
+}

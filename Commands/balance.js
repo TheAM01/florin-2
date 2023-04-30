@@ -20,7 +20,7 @@ export default {
 
         }
 
-        return interaction.editReply(`${interaction.user.username}, you have ${userWallet} coins in your wallet!`);
+        return interaction.editReply(`${interaction.user.username}, you have ${userWallet}<:florin_coin:1102216846830215229> in your wallet!`);
 
     },
 
