@@ -3,6 +3,11 @@ async function commands (interaction, client) {
     if (interaction.type === 3) {
 
         if (interaction.customId === "balance") {
+            interaction.options = {
+                getUser () {
+                    return null;
+                }
+            }
             const balance = await import("../Commands/balance.js");
             return await balance.default.execute(interaction);
         }
@@ -10,7 +15,7 @@ async function commands (interaction, client) {
         if (interaction.customId.startsWith("bet")) {
             interaction.options = {
                 getInteger () {
-                    return interaction.customId.slice(3);
+                    return parseInt(interaction.customId.slice(3));
                 }
             }
             const bet = await import("../Commands/bet.js");

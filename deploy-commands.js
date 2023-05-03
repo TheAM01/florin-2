@@ -1,9 +1,7 @@
-import { SlashCommandBuilder } from '@discordjs/builders'
 import { REST } from '@discordjs/rest'
 import { Routes } from 'discord-api-types/v9'
 import fs from 'node:fs'
 import config from './config.js'
-import path from "node:path"
 
 const commands = [];
 const commandFiles = fs.readdirSync('./Commands').filter(file => file.endsWith('.js'));

@@ -19,10 +19,10 @@ export default {
         
         await interaction.reply("<a:slot_running:1102199778546303071> <a:slot_running:1102199778546303071> <a:slot_running:1102199778546303071>");
 
-        const amount = interaction.options.getInteger('amount');
+        const amount = parseInt(interaction.options.getInteger('amount'))
         if (amount < 0) return interaction.editReply("Enter a valid number!")
 
-        let wallet = await db.get(`wallet_${interaction.user.id}`);
+        let wallet = parseInt(await db.get(`wallet_${interaction.user.id}`))
 
         if (!wallet) return interaction.editReply('You don\'t have a wallet yet. Do `/register` to start betting.');
         if (amount > wallet) return interaction.editReply(`You don\'t have \`${amount}\` in your wallet.`);
@@ -39,25 +39,25 @@ export default {
             content = slotIcons('fruits', 'fruits', 'fruits')
         }
         if (chance > 30 && chance <= 50) {
-            wallet += amount
+            wallet += parseInt(amount)
             message = `Nothing happened... Try again.`
             content = slotIcons('fruits', 'riches', 'fruits')
         }
         if (chance > 50 && chance <= 70) {
             win = amount * 2;
-            wallet += win;
+            wallet += parseInt(win);
             message = `Congratulations! You doubled ${amount} <:florin_coin:1102216846830215229> and won ${win} <:florin_coin:1102216846830215229>!`
-            content = slotIcons("riches", "fruits", "fruits")
+            content = slotIcons("riches", "fruits", "cards")
         }
         if (chance > 70 && chance <= 85) {
             win = amount * 3;
-            wallet += win;
+            wallet += parseInt(win);
             message = `Congratulations! You tripled ${amount} <:florin_coin:1102216846830215229> and won ${win} <:florin_coin:1102216846830215229>!`
             content = slotIcons("fruits", "cards", "cards")
         }
         if (chance > 85 && chance <= 95) {
             win = amount * 5;
-            wallet += win;
+            wallet += parseInt(win);
             message = `Congratulations! Your ${amount} <:florin_coin:1102216846830215229> got multiplied 5 times! Enjoy ${win} <:florin_coin:1102216846830215229>.`
             content = slotIcons("cards", "cards", "cards")
         }
@@ -65,12 +65,13 @@ export default {
             win = amount * 10;
             parseInt(wallet) += parseInt(win);
             message = `🎉🎉 JACKPOT!!! 🎉🎉\nYou hit the jackpot and won 10x your amount of ${amount} <:florin_coin:1102216846830215229>. Enjoy your ${win} <:florin_coin:1102216846830215229>!`
+        
             content = ":gem: :gem: :gem:"
         };
 
         const results = embed(interaction.user, message, "#03fc30", amount, win)
 
-        await db.set(`wallet_${interaction.user.id}`, wallet);
+        await db.set(`wallet_${interaction.user.id}`, parseInt(wallet));
         let emojis = content.split(" ");
 
         await interaction.editReply({content: `${emojis[0]} <a:slot_running:1102199778546303071> <a:slot_running:1102199778546303071>`});
@@ -91,7 +92,7 @@ export default {
 
 }
 
-function embed (user, msg, color, amount, win) {
+function embed (user, msg, color, amount, win, wallet) {
     return new EmbedBuilder()
     .setTitle(`${user.username}'s betting results`)
     .setDescription(msg)
@@ -103,6 +104,8 @@ function embed (user, msg, color, amount, win) {
             name: "Win", value: `${win} <:florin_coin:1102216846830215229>`
         }, {
             name: "Profit", value: `${(win - amount)} <:florin_coin:1102216846830215229>`
+        }, {
+            name: "Balance", value: `${wallet} <:florin_coin:1102216846830215229>`
         }
     )
     .setThumbnail(user.avatarURL())

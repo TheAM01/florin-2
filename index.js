@@ -3,13 +3,19 @@ import commandHandler from "./Main/handler.js";
 import server from "./Main/server.js";
 import config from "./config.js"
 import database from "./Main/database.js";
+import { ActivityType } from "discord.js";
 
 client.on('ready', async (c) => {
+    client.user.setPresence({
+        activities: [{ name: `${client.users.cache.size * 100} users`, type: ActivityType.Listening }],
+        status: 'online',
+    });
     console.clear();
     console.log(`Logged in as ${c.user.username}!`);
     // await onload()
     server()
 });
+
 
 client.on('interactionCreate', (i) => {
     commandHandler(i, client);
